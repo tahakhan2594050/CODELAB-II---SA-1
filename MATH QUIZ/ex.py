@@ -47,7 +47,7 @@ def main_menu():
             text=f"{i}. {level}",
             font=("Segoe UI", 14),
             bg="#990099",
-            fg="#FF0066",
+            fg="#FFFFFF",
             command=lambda lvl=i: select_difficulty(lvl),
             relief="flat",
             width=20,
@@ -80,13 +80,13 @@ def next_problem():
     problem_window = tk.Tk()
     problem_window.title(f"Question {current_question}/{total_questions}")
     problem_window.geometry("500x400")
-    problem_window.configure(bg="#3300CC")
+    problem_window.configure(bg="#FF99CC")
 
     progress_value = (current_question - 1) * (100 / total_questions)
     Progressbar(problem_window, orient=tk.HORIZONTAL, length=400, mode='determinate', value=progress_value).pack(pady=20)
 
-    tk.Label(problem_window, text=f"Question {current_question}/{total_questions}", font=("Segoe UI", 16, "bold"), fg="#33FFCC", bg="#3300CC").pack(pady=10)
-    tk.Label(problem_window, text=f"{num1} {operation} {num2} = ?", font=("Segoe UI", 24, "bold"), fg="#33FFCC", bg="#3300CC").pack(pady=20)
+    tk.Label(problem_window, text=f"Question {current_question}/{total_questions}", font=("Segoe UI", 16, "bold"), fg="#FF00FF", bg="#FF99CC").pack(pady=10)
+    tk.Label(problem_window, text=f"{num1} {operation} {num2} = ?", font=("Segoe UI", 24, "bold"), fg="#FF00FF", bg="#FF99CC").pack(pady=20)
 
     answer_entry = tk.Entry(problem_window, font=("Segoe UI", 18), justify="center")
     answer_entry.pack(pady=10)
@@ -117,7 +117,7 @@ def next_problem():
         except ValueError:
             messagebox.showwarning("Error", "Enter a valid number.")
 
-    tk.Button(problem_window, text="Submit", font=("Segoe UI", 14), bg="#66FF99", fg="#000066", command=check_answer, relief="flat").pack(pady=20)
+    tk.Button(problem_window, text="Submit", font=("Segoe UI", 14), bg="#FFCCFF", fg="#CC0099", command=check_answer, relief="flat").pack(pady=20)
 
     problem_window.mainloop()
 
@@ -139,14 +139,35 @@ def show_results():
     results = tk.Tk()
     results.title("Results")
     results.geometry("500x400")
-    results.configure(bg="#FFCC33")
+    results.configure(bg="#FFCCCC")
 
-    tk.Label(results, text="🎉 Quiz Complete 🎉", font=("Segoe UI", 20, "bold"), fg="#FF9900", bg="#FFCC33").pack(pady=20)
-    tk.Label(results, text=f"Score: {score}/100", font=("Segoe UI", 16), fg="#FF9900", bg="#FFCC33").pack(pady=10)
-    tk.Label(results, text=f"Rank: {rank}", font=("Segoe UI", 16), fg="#FF9900", bg="#FFCC33").pack(pady=10)
+    tk.Label(results, text="🎉 Quiz Complete 🎉", font=("Segoe UI", 20, "bold"), fg="#FF3399", bg="#FFCCCC").pack(pady=20)
+    tk.Label(results, text=f"Score: {score}/100", font=("Segoe UI", 16), fg="#FF3399", bg="#FFCCCC").pack(pady=10)
+    tk.Label(results, text=f"Rank: {rank}", font=("Segoe UI", 16), fg="#FF3399", bg="#FFCCCC").pack(pady=10)
 
-    tk.Button(results, text="Play Again", font=("Segoe UI", 14), bg="#00CC00", fg="white", command=lambda: [results.destroy(), main_menu()], relief="flat").pack(pady=10)
-    tk.Button(results, text="Exit", font=("Segoe UI", 14), bg="#990000", fg="white", command=results.destroy, relief="flat").pack(pady=10)
+    button_width = 15  # Ensures both buttons have the same width
+
+    tk.Button(
+        results,
+        text="Play Again",
+        font=("Segoe UI", 14),
+        bg="#FF3399",
+        fg="white",
+        width=button_width,
+        command=lambda: [results.destroy(), main_menu()],
+        relief="flat"
+    ).pack(pady=10)
+
+    tk.Button(
+        results,
+        text="Exit",
+        font=("Segoe UI", 14),
+        bg="#FF3399",
+        fg="white",
+        width=button_width,
+        command=results.destroy,
+        relief="flat"
+    ).pack(pady=10)
 
     results.mainloop()
 
